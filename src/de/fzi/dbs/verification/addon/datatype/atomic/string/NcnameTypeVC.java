@@ -19,7 +19,7 @@ import de.fzi.dbs.verification.event.datatype.NcnameProblem;
  */
 public class NcnameTypeVC extends TokenTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JConditional ifValueIsNcname = block._if(codeModel.ref(XmlNames.class).staticInvoke("isNCName").arg(value));

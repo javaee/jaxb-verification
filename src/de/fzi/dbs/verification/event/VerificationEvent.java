@@ -132,7 +132,7 @@ public class VerificationEvent implements ValidationEvent
     return getLinkedException().hashCode() + getLocator().hashCode() * 37;
   }
 
-  public boolean equals(Object obj)
+  public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj instanceof ValidationEvent)

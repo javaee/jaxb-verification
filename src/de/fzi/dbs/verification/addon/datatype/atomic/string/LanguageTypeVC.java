@@ -19,7 +19,7 @@ import de.fzi.dbs.verification.util.ValidationUtils;
  */
 public class LanguageTypeVC extends TokenTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JConditional ifValueIsLanguage = block._if(codeModel.ref(ValidationUtils.class).staticInvoke("isLanguage").arg(value));

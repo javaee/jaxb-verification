@@ -22,7 +22,7 @@ import de.fzi.dbs.verification.util.ValidationUtils;
  */
 public class AnyURITypeVC extends AbstractVC implements DiscreteVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JConditional ifIsAnyURI = block._if(codeModel.ref(de.fzi.dbs.verification.util.ValidationUtils.class).staticInvoke("isAnyURI").arg(value));

@@ -17,7 +17,7 @@ import de.fzi.dbs.verification.addon.datatype.DiscreteVC;
  */
 public abstract class BinaryBaseTypeVC extends AbstractVC implements DiscreteVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     return block;

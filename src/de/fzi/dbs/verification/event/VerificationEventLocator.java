@@ -183,16 +183,15 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
 
   public int hashCode()
   {
-    int hashCode = (parentLocator == null) ? 0 : parentLocator.hashCode();
-    hashCode = hashCode * 49 + getObject().hashCode();
+    int hashCode = getObject().hashCode();
     hashCode = hashCode * 49 + getFieldName().hashCode();
     return hashCode;
   }
 
-  public boolean equals(Object obj)
+  public boolean equals(final Object obj)
   {
     boolean result = false;
-    if (obj instanceof VerificationEventLocator)
+    if (obj != null && getClass().equals(obj.getClass()))
     {
       final VerificationEventLocator locator = (VerificationEventLocator) obj;
       result = (getObject() == locator.getObject()) &&

@@ -45,6 +45,9 @@ public abstract class AbstractVerifierTest extends TestCase
     super.setUp();
   }
 
+  /**
+   * Tests validation.
+   */
   public void testValidation()
   {
     final ObjectVerifierFactory objectVerifierFactory = getObjectVerifierFactory();

@@ -18,7 +18,7 @@ import de.fzi.dbs.verification.addon.datatype.ComparatorVC;
  */
 public class NumberTypeVC extends AbstractVC implements ComparatorVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     return block;

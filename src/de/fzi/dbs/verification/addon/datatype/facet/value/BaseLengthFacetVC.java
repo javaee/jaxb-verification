@@ -21,7 +21,7 @@ import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
  */
 public abstract class BaseLengthFacetVC extends DataTypeWithValueConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(datatype.getConcreteType());

@@ -16,7 +16,7 @@ import de.fzi.dbs.verification.addon.datatype.facet.DataTypeWithFacetVC;
  */
 public class WhiteSpaceFacetVC extends DataTypeWithFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     block.directStatement("// todo: check the semantics");

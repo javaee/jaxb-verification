@@ -87,7 +87,7 @@ public class EntryLocator extends VerificationEventLocator
     }
   }
 
-  public boolean equals(Object obj)
+  public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj instanceof EntryLocator)

@@ -20,7 +20,7 @@ import de.fzi.dbs.verification.event.datatype.NegativeProblem;
  */
 public class UnsignedByteTypeVC extends ShortTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JExpression shortValue = value.invoke("shortValue");

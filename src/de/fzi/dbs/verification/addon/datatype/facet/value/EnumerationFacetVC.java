@@ -15,7 +15,7 @@ import com.sun.msv.datatype.xsd.DataTypeWithFacet;
  */
 public class EnumerationFacetVC extends DataTypeWithValueConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     block.directStatement("// todo: check values of the enumeration");

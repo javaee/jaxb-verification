@@ -18,7 +18,7 @@ import com.sun.msv.datatype.xsd.ListType;
  */
 public class ListTypeVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final ListType listType = (ListType) datatype;
     final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(listType.itemType);

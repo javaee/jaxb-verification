@@ -29,14 +29,14 @@ import de.fzi.dbs.verification.event.datatype.RegularExpressionsProblem;
  */
 public class PatternFacetVC extends DataTypeWithLexicalConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final PatternFacet patternFacet = (PatternFacet) datatype;
     final JType regExpType = codeModel.ref(RegularExpression.class);
     if (patternFacet.patterns.length == 1)
     {
-      String pattern = patternFacet.patterns[0];
+      final String pattern = patternFacet.patterns[0];
       block._if(JOp.not(JExpr._new(regExpType).arg(JExpr.lit(pattern)).arg(JExpr.lit("X")).invoke("matches").arg(value.invoke("toString"))))
         ._then().assign(problem, JExpr._new(codeModel.ref(RegularExpressionProblem.class)).arg(value).arg(JExpr.lit(pattern)));
     }

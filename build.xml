@@ -25,6 +25,7 @@ by Aleksei Valikov, valikov@fzi.de
     <fileset dir="${lib.dir}/jakarta-commons">
       <include name="commons-lang.jar"/>
       <include name="commons-logging.jar"/>
+      <include name="commons-collections.jar"/>
     </fileset>
     <fileset dir="${lib.dir}/easymock">
       <include name="*.jar"/>
@@ -59,6 +60,9 @@ by Aleksei Valikov, valikov@fzi.de
     <javac destdir="${classes}" debug="true"
       srcdir="${src}"
       classpathref="compile.lib.path"/>
+    <copy todir="${classes}">
+      <fileset dir="${src}" includes="**/*.properties, **/*.res"/>
+    </copy>
   </target>
 
   <target name="javadoc">

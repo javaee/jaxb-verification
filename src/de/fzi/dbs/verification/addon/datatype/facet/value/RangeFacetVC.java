@@ -25,7 +25,7 @@ import java.math.BigInteger;
  */
 public abstract class RangeFacetVC extends DataTypeWithValueConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final RangeFacet rangeFacet = (RangeFacet) datatype;
     JExpression limitValue = null;

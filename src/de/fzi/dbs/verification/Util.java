@@ -26,7 +26,7 @@ public class Util
    */
   public static String generateFieldName(final JDefinedClass theClass, final String prefix)
   {
-    String name;
+    final String name;
     if (null == de.fzi.dbs.jaxb.addon.Util.getField(theClass, prefix))
     {
       name = prefix;

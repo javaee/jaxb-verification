@@ -249,6 +249,11 @@ public class VerifierGenerator extends ClassBasedGenerator
     return block;
   }
 
+  /**
+   * Generates check method for the collection entry.
+   * @param fieldUse field use.
+   * @return Generated method.
+   */
   protected JMethod generateCollectionValueEntryCheck(final FieldUse fieldUse)
   {
     final JType objectClass = codeModel.ref(Object.class);

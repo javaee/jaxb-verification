@@ -20,7 +20,7 @@ import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
  */
 public abstract class DataTypeWithFacetVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final DataTypeWithFacet dataTypeWithFacet = (DataTypeWithFacet) datatype;

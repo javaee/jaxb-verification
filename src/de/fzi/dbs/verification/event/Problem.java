@@ -68,7 +68,7 @@ public abstract class Problem extends Exception implements Reportable
    */
   public abstract ResourceBundle getDefaultResourceBundle();
 
-  public boolean equals(Object obj)
+  public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj instanceof Problem)

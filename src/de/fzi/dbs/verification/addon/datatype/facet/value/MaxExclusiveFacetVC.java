@@ -6,6 +6,7 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JOp;
 import de.fzi.dbs.verification.event.datatype.LessOrEqualProblem;
+import de.fzi.dbs.verification.event.datatype.GreaterOrEqualProblem;
 
 /**
  * Max-exclusive facet.
@@ -16,12 +17,12 @@ public class MaxExclusiveFacetVC extends RangeFacetVC
 {
   public JExpression rangeValid(final JCodeModel codeModel, final JExpression range)
   {
-    return JOp.gt(range, JExpr.lit(0));
+    return JOp.lt(range, JExpr.lit(0));
   }
 
   public JClass problemClass(final JCodeModel codeModel)
   {
-    return codeModel.ref(de.fzi.dbs.verification.event.datatype.LessOrEqualProblem.class);
+    return codeModel.ref(GreaterOrEqualProblem.class);
   }
 
 }

@@ -13,7 +13,7 @@ import com.sun.msv.datatype.xsd.Proxy;
  */
 public class ProxyVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final Proxy proxy = (Proxy) datatype;
     final VerificatorConstructor vc

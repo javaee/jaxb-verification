@@ -13,7 +13,7 @@ import com.sun.msv.datatype.DatabindableDatatype;
  */
 public class IDREFTypeVC extends NcnameTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     block.directStatement("// todo: check the IDREF type. Should it maybe be non-null?");

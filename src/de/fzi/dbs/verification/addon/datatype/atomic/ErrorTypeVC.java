@@ -16,7 +16,7 @@ import de.fzi.dbs.verification.addon.datatype.AbstractVC;
  */
 public class ErrorTypeVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     block.directStatement("// Fallback type: no validation rules");

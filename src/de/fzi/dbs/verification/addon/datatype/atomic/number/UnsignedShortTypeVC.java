@@ -20,7 +20,7 @@ import de.fzi.dbs.verification.event.datatype.NegativeProblem;
  */
 public class UnsignedShortTypeVC extends de.fzi.dbs.verification.addon.datatype.atomic.number.IntTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JExpression intValue = value.invoke("intValue");
