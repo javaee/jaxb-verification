@@ -72,6 +72,7 @@
       <include name="jaxb-libs.jar"/>
       <include name="namespace.jar"/>
       <include name="relaxngDatatype.jar"/>
+      <include name="xercesImpl.jar"/>
       <include name="xsdlib.jar"/>
     </fileset>
   </path>
