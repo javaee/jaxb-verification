@@ -107,6 +107,9 @@ by Aleksei Valikov, valikov@fzi.de
       <fileset dir="${dist}">
         <include name="**"/>
       </fileset>
+      <fileset dir="${basedir}">
+        <include name="sample.build.xml"/>
+      </fileset>
     </copy>
     <zip zipfile="www/bin/${name}.zip">
       <fileset dir="${basedir}">
