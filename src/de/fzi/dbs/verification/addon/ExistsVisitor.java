@@ -81,7 +81,7 @@ public class ExistsVisitor extends BGMExpressionVisitor
       final JExpression notNull = JOp.ne(JExpr._null(), JExpr.invoke(master, getter));
       if (!item.multiplicity.isAtMostOnce())
       {
-        return JOp.cand(notNull, JOp.gt(JExpr.invoke(JExpr.invoke(master, getter), "size"), JExpr.lit(1)));
+        return JOp.cand(notNull, JOp.gt(JExpr.invoke(JExpr.invoke(master, getter), "size"), JExpr.lit(0)));
       }
       else
       {

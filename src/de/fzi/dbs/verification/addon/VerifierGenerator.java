@@ -24,14 +24,14 @@ import com.sun.tools.xjc.grammar.FieldUse;
 import com.sun.tools.xjc.grammar.PrimitiveItem;
 import com.sun.tools.xjc.grammar.TypeItem;
 import de.fzi.dbs.verification.ObjectVerifier;
-import de.fzi.dbs.verification.datatype.VerificatorConstructor;
-import de.fzi.dbs.verification.datatype.VerificatorConstructorFactory;
-import de.fzi.dbs.verification.datatype.problem.ValueProblem;
-import de.fzi.dbs.verification.event.DatatypeEvent;
+import de.fzi.dbs.verification.addon.datatype.VerificatorConstructor;
+import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
+import de.fzi.dbs.verification.event.datatype.ValueProblem;
+import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.EntryLocator;
-import de.fzi.dbs.verification.event.StructuralEvent;
+import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.VerificationEventLocator;
-import de.fzi.dbs.verification.structure.problem.NonExpectedClassProblem;
+import de.fzi.dbs.verification.event.structure.NonExpectedClassProblem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -220,8 +220,8 @@ public class VerifierGenerator extends ClassBasedGenerator
     ifNull._then().directStatement("// todo: report null");
     ifNull._else().directStatement("// Report wrong class");
     ifNull._else().invoke(handler, "handleEvent").
-      arg(JExpr._new(codeModel.ref(StructuralEvent.class)).arg(locator).
-      arg(JExpr._new(codeModel.ref(NonExpectedClassProblem.class)).arg(value.invoke("getClass"))));
+      arg(JExpr._new(codeModel.ref(VerificationEvent.class)).arg(locator).
+      arg(JExpr._new(codeModel.ref(de.fzi.dbs.verification.event.structure.NonExpectedClassProblem.class)).arg(value.invoke("getClass"))));
     return block;
   }
 
@@ -241,6 +241,7 @@ public class VerifierGenerator extends ClassBasedGenerator
     final JForLoop _for = block._for();
     final JVar index = _for.init(codeModel.INT, "index", JExpr.lit(0));
     _for.test(JOp.lt(index, values.invoke("size")));
+    _for.update(JOp.incr(index));
     final JType objectClass = codeModel.ref(Object.class);
     final JVar item = _for.body().decl(objectClass, "item", JExpr.invoke(values, "get").arg(index));
     final JExpression entryLocator = JExpr._new(codeModel.ref(EntryLocator.class)).arg(locator).arg(index);
@@ -313,11 +314,11 @@ public class VerifierGenerator extends ClassBasedGenerator
       else
       {
         block.directStatement("// Checking " + guard.getClass() + " datatype");
-        final JVar problem = block.decl(codeModel.ref(ValueProblem.class), "problem", JExpr._null());
+        final JVar problem = block.decl(codeModel.ref(de.fzi.dbs.verification.event.datatype.ValueProblem.class), "problem", JExpr._null());
         block.add(vc.verify(guard, codeModel, value, problem));
         final JConditional ifProblemIsNotNull = block._if(JOp.ne(JExpr._null(), problem));
         ifProblemIsNotNull._then().directStatement("// Handle event");
-        ifProblemIsNotNull._then().invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(DatatypeEvent.class)).arg(locator).arg(problem));
+        ifProblemIsNotNull._then().invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).arg(locator).arg(problem));
       }
     }
     return block;

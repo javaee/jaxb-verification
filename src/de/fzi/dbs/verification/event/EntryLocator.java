@@ -1,5 +1,9 @@
 package de.fzi.dbs.verification.event;
 
+import java.text.MessageFormat;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 /**
  * Locator for the collection entry.
  */
@@ -54,5 +58,44 @@ public class EntryLocator extends VerificationEventLocator
   public String getStep()
   {
     return getFieldName() + "[" + getIndex() + "]";
+  }
+
+  public String toString()
+  {
+    final StringBuffer sb = new StringBuffer();
+    sb.append("Object [");
+    sb.append(getObject());
+    sb.append("], field [");
+    sb.append(getFieldName());
+    sb.append("], entry index [");
+    sb.append(getIndex());
+    sb.append("].");
+    return sb.toString();
+  }
+
+  public Object[] getMessageParameters()
+  {
+    return new Object[]
+    {
+      getObject(),
+      getFieldName(),
+      new Integer(getIndex()),
+      getELExpression(),
+      getXPathExpression(),
+    };
+  }
+
+  public String getLocationMessage(final ResourceBundle bundle)
+  {
+    try
+    {
+      final String messageTemplate = bundle.getString(getMessageCode());
+      return MessageFormat.format(messageTemplate, getMessageParameters());
+    }
+    catch (MissingResourceException mrex)
+    {
+      return
+        MessageFormat.format("Object: {0}\nField: {1}\nEntry index: {2}.\nEL: {3}\nXPath: {4}.", getMessageParameters());
+    }
   }
 }

@@ -34,11 +34,11 @@ import com.sun.tools.xjc.grammar.InterfaceItem;
 import com.sun.tools.xjc.grammar.PrimitiveItem;
 import com.sun.tools.xjc.grammar.SuperClassItem;
 import de.fzi.dbs.jaxb.addon.Util;
-import de.fzi.dbs.verification.event.StructuralEvent;
+import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.VerificationEventLocator;
-import de.fzi.dbs.verification.structure.problem.EmptyFieldProblem;
-import de.fzi.dbs.verification.structure.problem.TooFewElementsProblem;
-import de.fzi.dbs.verification.structure.problem.TooManyElementsProblem;
+import de.fzi.dbs.verification.event.structure.EmptyFieldProblem;
+import de.fzi.dbs.verification.event.structure.TooFewElementsProblem;
+import de.fzi.dbs.verification.event.structure.TooManyElementsProblem;
 
 /**
  * This visitor generates statements that check structure of the master object according to the
@@ -161,7 +161,7 @@ public class CheckVisitor extends BGMExpressionVisitor
           else
           {
             ifNull.directStatement("// Report missing object");
-            ifNull.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(StructuralEvent.class)).
+            ifNull.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).
               arg(JExpr._new(codeModel.ref(VerificationEventLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name))).
               arg(JExpr._new(codeModel.ref(EmptyFieldProblem.class))));
           }
@@ -176,7 +176,7 @@ public class CheckVisitor extends BGMExpressionVisitor
           else
           {
             ifNull.directStatement("// Report missing object");
-            ifNull.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(StructuralEvent.class)).
+            ifNull.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).
               arg(JExpr._new(codeModel.ref(VerificationEventLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name))).
               arg(JExpr._new(codeModel.ref(EmptyFieldProblem.class))));
           }
@@ -190,7 +190,7 @@ public class CheckVisitor extends BGMExpressionVisitor
 
           minOccursViolated.directStatement("// Report minimum of occurences violated");
 
-          minOccursViolated.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(StructuralEvent.class)).
+          minOccursViolated.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).
             arg(JExpr._new(codeModel.ref(VerificationEventLocator.class)).
             arg(parentLocator).
             arg(master).
@@ -207,7 +207,7 @@ public class CheckVisitor extends BGMExpressionVisitor
 
             maxOccursViolated.directStatement("// Report maximum of occurences violated");
 
-            maxOccursViolated.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(StructuralEvent.class)).
+            maxOccursViolated.invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).
               arg(JExpr._new(codeModel.ref(VerificationEventLocator.class)).
               arg(parentLocator).
               arg(master).

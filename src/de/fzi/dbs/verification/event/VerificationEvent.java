@@ -1,16 +1,17 @@
 package de.fzi.dbs.verification.event;
 
-import de.fzi.dbs.verification.problem.Problem;
-
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventLocator;
+import java.text.MessageFormat;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * Verification event.
  *
  * @author Aleksei Valikov
  */
-public abstract class VerificationEvent implements ValidationEvent
+public class VerificationEvent implements ValidationEvent
 {
   /**
    * Event locator.
@@ -24,10 +25,11 @@ public abstract class VerificationEvent implements ValidationEvent
 
   /**
    * Constructs a new verification event.
+   *
    * @param locator locator (where).
    * @param problem problem (what).
    */
-  protected VerificationEvent(final VerificationEventLocator locator, final Problem problem)
+  public VerificationEvent(final VerificationEventLocator locator, final de.fzi.dbs.verification.event.Problem problem)
   {
     this.locator = locator;
     this.problem = problem;
@@ -50,7 +52,8 @@ public abstract class VerificationEvent implements ValidationEvent
 
   /**
    * Returns locator as a {@link VerificationEventLocator}.
-   * @return Locator as a {@link VerificationEventLocator}. 
+   *
+   * @return Locator as a {@link VerificationEventLocator}.
    */
   public VerificationEventLocator getVerificationEventLocator()
   {
@@ -62,5 +65,65 @@ public abstract class VerificationEvent implements ValidationEvent
     return problem;
   }
 
+  /**
+   * Returns the linked problem.
+   *
+   * @return The problem.
+   */
+  public Problem getProblem()
+  {
+    return problem;
+  }
 
+  /**
+   * Returns code of the message.
+   *
+   * @return Code of the message.
+   */
+  public String getMessageCode()
+  {
+    return VerificationEvent.class.getName();
+  }
+
+  /**
+   * Returns event message.
+   *
+   * @param bundle resource bundle.
+   * @return event message.
+   */
+  public String getMessage(final ResourceBundle bundle)
+  {
+    final Object[] messageParameters = new Object[]{getVerificationEventLocator().getMessage(bundle),
+                                                    getProblem().getMessage(bundle)};
+    try
+    {
+      return MessageFormat.format(bundle.getString(getMessageCode()), messageParameters);
+
+    }
+    catch (MissingResourceException mrex)
+    {
+      return MessageFormat.format("Location:\n{0}\nProblem:\n{1}", messageParameters);
+    }
+  }
+
+  /**
+   * Returns event message.
+   *
+   * @return Event message.
+   */
+  public String getMessage()
+  {
+    final ResourceBundle bundle = ResourceBundle.getBundle(getClass().getPackage().getName() + ".Messages");
+    final Object[] messageParameters = new Object[]{getVerificationEventLocator().getMessage(),
+                                                    getProblem().getMessage()};
+    try
+    {
+      return MessageFormat.format(bundle.getString(getMessageCode()), messageParameters);
+
+    }
+    catch (MissingResourceException mrex)
+    {
+      return MessageFormat.format("Location:\n{0}\nProblem:\n{1}", messageParameters);
+    }
+  }
 }

@@ -4,6 +4,9 @@ import com.sun.xml.bind.ValidationEventLocatorEx;
 import org.w3c.dom.Node;
 
 import java.net.URL;
+import java.text.MessageFormat;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * Verification event locator.
@@ -43,7 +46,7 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
 
   /**
    * Returns parent locator.
-   * 
+   *
    * @return Parent locator.
    */
   public VerificationEventLocator getParentLocator()
@@ -122,8 +125,63 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
    *
    * @return XPath-expression identifying location.
    */
-  public String getXPath()
+  public String getXPathExpression()
   {
-    return ((null == getParentLocator()) ? "" : getParentLocator().getXPath() + "/") + getStep();
+    return ((null == getParentLocator()) ? "" : getParentLocator().getXPathExpression() + "/") + getStep();
+  }
+
+  /**
+   * Returns message code.
+   *
+   * @return Message code.
+   */
+  public String getMessageCode()
+  {
+    return getClass().getName();
+  }
+
+  /**
+   * Returns parameters for message formatting.
+   *
+   * @return Message formatting parameters.
+   */
+  public Object[] getMessageParameters()
+  {
+    return new Object[]
+    {
+      getObject(),
+      getFieldName(),
+      getELExpression(),
+      getXPathExpression(),
+    };
+  }
+
+  /**
+   * Returns location message.
+   *
+   * @return location message.
+   */
+  public String getMessage(final ResourceBundle bundle)
+  {
+    try
+    {
+      final String messageTemplate = bundle.getString(getMessageCode());
+      return MessageFormat.format(messageTemplate, getMessageParameters());
+    }
+    catch (MissingResourceException mrex)
+    {
+      return
+        MessageFormat.format("Object: {0}\nField: {1}\nEL: {2}\nXPath: {3}.", getMessageParameters());
+    }
+  }
+
+  /**
+   * Returns location message.
+   *
+   * @return Location message.
+   */
+  public String getMessage()
+  {
+    return getMessage(ResourceBundle.getBundle(getClass().getPackage().getName() + ".Messages"));
   }
 }
