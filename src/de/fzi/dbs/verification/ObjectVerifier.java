@@ -1,6 +1,7 @@
 package de.fzi.dbs.verification;
 
 import de.fzi.dbs.verification.event.VerificationEventLocator;
+import de.fzi.dbs.verification.event.AbstractVerificationEventLocator;
 
 import javax.xml.bind.ValidationEventHandler;
 
@@ -30,5 +31,5 @@ public interface ObjectVerifier
    * @param handler handler used to report validation events.
    * @param object  object to check.
    */
-  public void check(VerificationEventLocator locator, ValidationEventHandler handler, Object object);
+  public void check(AbstractVerificationEventLocator locator, ValidationEventHandler handler, Object object);
 }

@@ -16,7 +16,7 @@ public class VerificationEvent implements ValidationEvent
   /**
    * Event locator.
    */
-  protected final VerificationEventLocator locator;
+  protected final AbstractVerificationEventLocator locator;
 
   /**
    * The problem.
@@ -29,7 +29,7 @@ public class VerificationEvent implements ValidationEvent
    * @param locator locator (where).
    * @param problem problem (what).
    */
-  public VerificationEvent(final VerificationEventLocator locator, final de.fzi.dbs.verification.event.Problem problem)
+  public VerificationEvent(final AbstractVerificationEventLocator locator, final de.fzi.dbs.verification.event.Problem problem)
   {
     this.locator = locator;
     this.problem = problem;
@@ -55,7 +55,7 @@ public class VerificationEvent implements ValidationEvent
    *
    * @return Locator as a {@link VerificationEventLocator}.
    */
-  public VerificationEventLocator getVerificationEventLocator()
+  public AbstractVerificationEventLocator getVerificationEventLocator()
   {
     return locator;
   }

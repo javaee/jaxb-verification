@@ -29,6 +29,7 @@ import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
 import de.fzi.dbs.verification.event.EntryLocator;
 import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.VerificationEventLocator;
+import de.fzi.dbs.verification.event.AbstractVerificationEventLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -126,7 +127,7 @@ public class VerifierGenerator extends ClassBasedGenerator
   protected JMethod generateCheck()
   {
     final JMethod check = theClass.method(JMod.PUBLIC, codeModel.VOID, "check");
-    final JVar parentLocator = check.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
+    final JVar parentLocator = check.param(codeModel.ref(AbstractVerificationEventLocator.class), "parentLocator");
     final JVar handler = check.param(codeModel.ref(ValidationEventHandler.class), "handler");
     final JVar master = check.param(classContext.ref, "master");
     final JStatement statement = (JStatement) expression.visit(new CheckVisitor(classContext, handler, parentLocator, master));
@@ -163,7 +164,7 @@ public class VerifierGenerator extends ClassBasedGenerator
   {
     /// check<Name>(parentLocator, handler, master, value)
     final JMethod fieldCheck = theClass.method(JMod.PUBLIC, codeModel.VOID, "check" + fieldUse.name);
-    final JVar parentLocator = fieldCheck.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
+    final JVar parentLocator = fieldCheck.param(codeModel.ref(AbstractVerificationEventLocator.class), "parentLocator");
     final JVar handler = fieldCheck.param(codeModel.ref(ValidationEventHandler.class), "handler");
     final JVar master = fieldCheck.param(classContext.ref, "master");
 
@@ -173,7 +174,7 @@ public class VerifierGenerator extends ClassBasedGenerator
     final String fieldParamName = fieldUse.multiplicity.isAtMostOnce() ? "value" : "values";
     final JVar value = fieldCheck.param(fieldParamType, fieldParamName);
 
-    final JExpression locator = JExpr._new(classContext.parent.getCodeModel().ref(VerificationEventLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name));
+    final JExpression locator = JExpr._new(codeModel.ref(VerificationEventLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name));
 
     final JStatement statement = fieldUse.multiplicity.isAtMostOnce() ?
       generateSingleValueCheck(fieldUse, locator, handler, master, value, fieldParamType) :
@@ -259,7 +260,7 @@ public class VerifierGenerator extends ClassBasedGenerator
     final JType objectClass = codeModel.ref(Object.class);
     /// check<Name>(locator, handler, master, value)
     final JMethod check = theClass.method(JMod.PUBLIC, codeModel.VOID, "check" + fieldUse.name);
-    final JVar parentLocator = check.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
+    final JVar parentLocator = check.param(codeModel.ref(AbstractVerificationEventLocator.class), "parentLocator");
     final JVar handler = check.param(codeModel.ref(ValidationEventHandler.class), "handler");
     final JVar master = check.param(classContext.ref, "master");
     final JVar index = check.param(codeModel.INT, "index");
@@ -352,7 +353,7 @@ public class VerifierGenerator extends ClassBasedGenerator
   protected JMethod generateObjectCheck()
   {
     final JMethod objectCheck = theClass.method(JMod.PUBLIC, codeModel.VOID, "check");
-    final JVar parentLocator = objectCheck.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
+    final JVar parentLocator = objectCheck.param(codeModel.ref(AbstractVerificationEventLocator.class), "parentLocator");
     final JVar handler = objectCheck.param(codeModel.ref(ValidationEventHandler.class), "handler");
     final JVar object = objectCheck.param(Object.class, "object");
     objectCheck.body().invoke(this.check).arg(parentLocator).arg(handler).arg(JExpr.cast(classContext.ref, object));

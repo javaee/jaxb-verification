@@ -1,10 +1,5 @@
 package de.fzi.dbs.verification.event;
 
-import com.sun.xml.bind.ValidationEventLocatorEx;
-import de.fzi.dbs.verification.Reportable;
-import org.w3c.dom.Node;
-
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -14,23 +9,8 @@ import java.util.ResourceBundle;
  *
  * @author Aleksei Valikov
  */
-public class VerificationEventLocator implements ValidationEventLocatorEx, Reportable
+public final class VerificationEventLocator extends AbstractVerificationEventLocator
 {
-  /**
-   * Parent locator.
-   */
-  protected final VerificationEventLocator parentLocator;
-
-  /**
-   * Object.
-   */
-  protected final Object object;
-
-  /**
-   * Field name.
-   */
-  protected final String fieldName;
-
   /**
    * Constructs a new verification event locator.
    *
@@ -38,61 +18,9 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
    * @param object        object.
    * @param fieldName     field name.
    */
-  public VerificationEventLocator(final VerificationEventLocator parentLocator, final Object object, final String fieldName)
+  public VerificationEventLocator(final AbstractVerificationEventLocator parentLocator, final Object object, final String fieldName)
   {
-    this.object = object;
-    this.fieldName = fieldName;
-    this.parentLocator = parentLocator;
-  }
-
-  /**
-   * Returns parent locator.
-   *
-   * @return Parent locator.
-   */
-  public VerificationEventLocator getParentLocator()
-  {
-    return parentLocator;
-  }
-
-  public Object getObject()
-  {
-    return object;
-  }
-
-  public String getFieldName()
-  {
-    return fieldName;
-  }
-
-  public int getColumnNumber()
-  {
-    return 0;
-  }
-
-  public int getLineNumber()
-  {
-    return 0;
-  }
-
-  public int getOffset()
-  {
-    return 0;
-  }
-
-  public URL getURL()
-  {
-    return null;
-  }
-
-  public Node getNode()
-  {
-    return null;
-  }
-
-  public String toString()
-  {
-    return getMessage();
+    super(parentLocator, object, fieldName);
   }
 
   /**
@@ -103,36 +31,6 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
   public String getStep()
   {
     return getFieldName();
-  }
-
-  /**
-   * Returns EL-style expression identifying location.
-   *
-   * @return EL-style expression identifying location.
-   */
-  public String getELExpression()
-  {
-    return ((null == getParentLocator()) ? "" : getParentLocator().getELExpression() + ".") + getStep();
-  }
-
-  /**
-   * Returns XPath-expression identifying location.
-   *
-   * @return XPath-expression identifying location.
-   */
-  public String getJXPathExpression()
-  {
-    return ((null == getParentLocator()) ? "" : getParentLocator().getJXPathExpression() + "/") + getStep();
-  }
-
-  /**
-   * Returns message code.
-   *
-   * @return Message code.
-   */
-  public String getMessageCode()
-  {
-    return getClass().getName();
   }
 
   /**
@@ -171,27 +69,10 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
     }
   }
 
-  /**
-   * Returns location message.
-   *
-   * @return Location message.
-   */
-  public String getMessage()
-  {
-    return getMessage(ResourceBundle.getBundle(getClass().getPackage().getName() + ".Messages"));
-  }
-
-  public int hashCode()
-  {
-    int hashCode = getObject().hashCode();
-    hashCode = hashCode * 49 + getFieldName().hashCode();
-    return hashCode;
-  }
-
   public boolean equals(final Object obj)
   {
     boolean result = false;
-    if (obj instanceof VerificationEventLocator && !(obj instanceof EntryLocator))
+    if (obj instanceof VerificationEventLocator)
     {
       final VerificationEventLocator locator = (VerificationEventLocator) obj;
       result = (getObject() == locator.getObject()) &&
@@ -199,6 +80,5 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
     }
     return result;
   }
-
 
 }

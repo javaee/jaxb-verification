@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 /**
  * Locator for the collection entry.
  */
-public class EntryLocator extends VerificationEventLocator
+public final class EntryLocator extends AbstractVerificationEventLocator
 {
   /**
    * Entry index.
@@ -22,7 +22,7 @@ public class EntryLocator extends VerificationEventLocator
    * @param fieldName     field name.
    * @param index         entry index.
    */
-  public EntryLocator(final VerificationEventLocator parentLocator, final Object object, final String fieldName, final int index)
+  public EntryLocator(final AbstractVerificationEventLocator parentLocator, final Object object, final String fieldName, final int index)
   {
     super(parentLocator, object, fieldName);
     this.index = index;
@@ -60,7 +60,7 @@ public class EntryLocator extends VerificationEventLocator
     return getFieldName() + "[" + getIndex() + "]";
   }
 
-  
+
   public Object[] getMessageParameters()
   {
     return new Object[]
@@ -93,7 +93,10 @@ public class EntryLocator extends VerificationEventLocator
     if (obj instanceof EntryLocator)
     {
       final EntryLocator locator = (EntryLocator) obj;
-      result = super.equals(locator) && getIndex() == locator.getIndex();
+      result = (getObject() == locator.getObject()) &&
+        (getFieldName().equals(locator.getFieldName())) &&
+        getIndex() == locator.getIndex();
+
     }
     return result;
   }
