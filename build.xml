@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+THIS FILE IS PART OF THE HyperJAXB SOURCE CODE.
+USE, DISTRIBUTION AND REPRODUCTION OF THIS SOURCE IS
+GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE
+IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.
+
+THE HyperJAXB SOURCE CODE IS (C) COPYRIGHT 2004
+by Aleksei Valikov, valikov@fzi.de
+-->
+<project name="jaxb-verification" default="jar">
+
+  <property name="name" value="jaxb-verification"/>
+  <property name="dist" location="${basedir}/dist"/>
+  <property name="lib.dir" location="${basedir}/lib"/>
+  <property name="template.dir" location="${basedir}/template"/>
+  <property name="jar.name" value="${name}"/>
+  <property name="classes" location="${basedir}/classes"/>
+  <property name="src" location="${basedir}/src"/>
+  <property name="meta-inf" value="${src}/META-INF"/>
+
+  <path id="compile.lib.path">
+    <fileset dir="${lib.dir}/jakarta-commons">
+      <include name="commons-logging.jar"/>
+    </fileset>
+    <fileset dir="${lib.dir}/hyperjaxb">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${lib.dir}/jaxb">
+      <include name="jaxb-api.jar"/>
+      <include name="jaxb-impl.jar"/>
+      <include name="jaxb-libs.jar"/>
+      <include name="jaxb-xjc.jar"/>
+      <include name="xsdlib.jar"/>
+    </fileset>
+    <fileset dir="${lib.dir}/junit">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${lib.dir}/pf">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="clean">
+    <delete dir="${classes}"/>
+    <delete dir="${template.dir}"/>
+  </target>
+
+  <target name="compile" depends="clean">
+    <mkdir dir="${classes}"/>
+    <javac destdir="${classes}" debug="true"
+      srcdir="${src}"
+      classpathref="compile.lib.path"/>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar jarfile="${dist}/${jar.name}.jar" basedir="${classes}">
+      <metainf dir="${meta-inf}"/>
+    </jar>
+  </target>
+
+  <target name="dist" depends="jar">
+    <copy todir="www/doc">
+      <fileset dir="doc">
+        <include name="reference/**"/>
+        <exclude name="reference/support/**"/>
+        <exclude name="**/*.xml"/>
+        <exclude name="**/*.xsl"/>
+      </fileset>
+    </copy>
+    <copy todir="www/bin">
+      <fileset dir="${dist}">
+        <include name="**"/>
+      </fileset>
+    </copy>
+    <zip zipfile="www/bin/${name}.zip">
+      <fileset dir="${basedir}">
+        <include name="dist/**"/>
+        <include name="doc/**"/>
+        <include name="log4j/**"/>
+        <include name="lib/**"/>
+        <include name="src/**"/>
+        <include name="tests/*/samples/**"/>
+        <include name="tests/*/schema/**"/>
+        <include name="tests/*/binding/**"/>
+        <include name="tests/build.xml"/>
+        <include name="tests/test.build.xml"/>
+        <include name="build.xml"/>
+      </fileset>
+    </zip>
+  </target>
+</project>
