@@ -81,11 +81,11 @@ public class EntryLocator extends VerificationEventLocator
       getFieldName(),
       new Integer(getIndex()),
       getELExpression(),
-      getXPathExpression(),
+      getJXPathExpression(),
     };
   }
 
-  public String getLocationMessage(final ResourceBundle bundle)
+  public String getMessage(final ResourceBundle bundle)
   {
     try
     {
@@ -95,7 +95,7 @@ public class EntryLocator extends VerificationEventLocator
     catch (MissingResourceException mrex)
     {
       return
-        MessageFormat.format("Object: {0}\nField: {1}\nEntry index: {2}.\nEL: {3}\nXPath: {4}.", getMessageParameters());
+        MessageFormat.format("Object: {0}\nField: {1}\nEntry index: {2}.\nEL: {3}\nJXPath: {4}.", getMessageParameters());
     }
   }
 }

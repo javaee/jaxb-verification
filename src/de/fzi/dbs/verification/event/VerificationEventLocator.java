@@ -1,6 +1,7 @@
 package de.fzi.dbs.verification.event;
 
 import com.sun.xml.bind.ValidationEventLocatorEx;
+import de.fzi.dbs.verification.Reportable;
 import org.w3c.dom.Node;
 
 import java.net.URL;
@@ -13,7 +14,7 @@ import java.util.ResourceBundle;
  *
  * @author Aleksei Valikov
  */
-public class VerificationEventLocator implements ValidationEventLocatorEx
+public class VerificationEventLocator implements ValidationEventLocatorEx, Reportable
 {
   /**
    * Parent locator.
@@ -125,9 +126,9 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
    *
    * @return XPath-expression identifying location.
    */
-  public String getXPathExpression()
+  public String getJXPathExpression()
   {
-    return ((null == getParentLocator()) ? "" : getParentLocator().getXPathExpression() + "/") + getStep();
+    return ((null == getParentLocator()) ? "" : getParentLocator().getJXPathExpression() + "/") + getStep();
   }
 
   /**
@@ -152,13 +153,14 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
       getObject(),
       getFieldName(),
       getELExpression(),
-      getXPathExpression(),
+      getJXPathExpression(),
     };
   }
 
   /**
    * Returns location message.
    *
+   * @param bundle resource bundle to be used to locate message template.
    * @return location message.
    */
   public String getMessage(final ResourceBundle bundle)
@@ -171,7 +173,7 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
     catch (MissingResourceException mrex)
     {
       return
-        MessageFormat.format("Object: {0}\nField: {1}\nEL: {2}\nXPath: {3}.", getMessageParameters());
+        MessageFormat.format("Object: {0}\nField: {1}\nEL: {2}\nJXPath: {3}.", getMessageParameters());
     }
   }
 

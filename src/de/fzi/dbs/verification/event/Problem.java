@@ -1,5 +1,7 @@
 package de.fzi.dbs.verification.event;
 
+import de.fzi.dbs.verification.Reportable;
+
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -9,7 +11,7 @@ import java.util.ResourceBundle;
  *
  * @author Aleksei Valikov
  */
-public abstract class Problem extends Exception
+public abstract class Problem extends Exception implements Reportable
 {
   /**
    * Returns code of the problem. By default, code of the problem is problem's class name.

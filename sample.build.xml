@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<project name="sample" default="jar">
+
+  <property name="main.dir" value="../.."/>
+
+  <!-- Change this property to the location where jaxb-verification.jar is placed -->
+  <property name="main.dist.dir" location="${main.dir}/dist"/>
+  <!-- Change this property to the location where library directories are placed -->
+  <property name="main.lib.dir" location="${main.dir}/lib"/>
+  <property name="sample.lib.dir" location="${basedir}/lib"/>
+
+  <property name="name" value="sample"/>
+  <property name="jar.name" value="${name}"/>
+  <property name="sources" location="${basedir}/src"/>
+  <property name="classes" location="${basedir}/classes"/>
+  <property name="generated.sources" location="${basedir}/generated.sources"/>
+
+
+  <property name="schema" location="${basedir}/schema/schema.xsd"/>
+  <property name="database" location="${basedir}/database"/>
+
+  <path id="schemas.path">
+    <fileset dir="${basedir}/schema">
+      <include name="*.xsd"/>
+    </fileset>
+  </path>
+
+  <path id="xjc.lib.path">
+    <pathelement location="${main.dir}/log4j"/>
+    <fileset dir="${main.dist.dir}">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${main.lib.dir}/hyperjaxb">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${main.lib.dir}/jaxb">
+      <include name="dom.jar"/>
+      <include name="jax-qname.jar"/>
+      <include name="jaxb-api.jar"/>
+      <include name="jaxb-impl.jar"/>
+      <include name="jaxb-libs.jar"/>
+      <include name="jaxb-xjc.jar"/>
+      <include name="jaxp-api.jar"/>
+      <include name="namespace.jar"/>
+      <include name="relaxngDatatype.jar"/>
+      <include name="sax.jar"/>
+      <include name="xalan.jar"/>
+      <include name="xercesImpl.jar"/>
+      <include name="xsdlib.jar"/>
+    </fileset>
+    <fileset dir="${main.lib.dir}/jakarta-commons">
+      <include name="commons-logging.jar"/>
+    </fileset>
+    <fileset dir="${main.lib.dir}/log4j">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="compile.lib.path">
+    <fileset dir="${main.dist.dir}">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${main.lib.dir}/jaxb">
+      <include name="jax-qname.jar"/>
+      <include name="jaxb-api.jar"/>
+      <include name="jaxb-impl.jar"/>
+      <include name="jaxb-libs.jar"/>
+      <include name="namespace.jar"/>
+      <include name="relaxngDatatype.jar"/>
+      <include name="xsdlib.jar"/>
+    </fileset>
+  </path>
+
+  <target name="init"/>
+
+  <target name="clean" depends="init">
+    <delete dir="${generated.sources}"/>
+    <delete dir="${classes}"/>
+    <delete dir="${sample.lib.dir}"/>
+  </target>
+
+  <target name="generate.sources">
+    <taskdef name="xjc"
+      classname="com.sun.tools.xjc.XJCTask"
+      classpathref="xjc.lib.path"/>
+    <mkdir dir="${generated.sources}"/>
+    <xjc target="${generated.sources}">
+      <arg line="-nv"/>
+      <arg line="-extension"/>
+      <arg line="-Xverification"/>
+      <binding dir="${basedir}">
+        <include name="binding/*.xml"/>
+      </binding>
+      <schema dir="${basedir}">
+        <include name="schema/*.xsd"/>
+      </schema>
+    </xjc>
+  </target>
+
+  <target name="compile" depends="generate.sources">
+    <mkdir dir="${classes}"/>
+    <javac destdir="${classes}" debug="true"
+      srcdir="${generated.sources}"
+      classpathref="compile.lib.path">
+    </javac>
+    <copy todir="${classes}">
+      <fileset dir="${generated.sources}">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="jar" depends="compile">
+    <mkdir dir="${sample.lib.dir}"/>
+    <jar jarfile="${sample.lib.dir}/${jar.name}.jar" basedir="${classes}"/>
+  </target>
+
+</project>
