@@ -133,6 +133,7 @@ by Aleksei Valikov, valikov@fzi.de
         <include name="tests/build.xml"/>
         <include name="tests/test.build.xml"/>
         <include name="build.xml"/>
+        <include name="license.txt"/>
         <include name="sample.build.xml"/>
       </fileset>
     </zip>
