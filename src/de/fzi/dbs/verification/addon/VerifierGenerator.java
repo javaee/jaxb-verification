@@ -26,12 +26,9 @@ import com.sun.tools.xjc.grammar.TypeItem;
 import de.fzi.dbs.verification.ObjectVerifier;
 import de.fzi.dbs.verification.addon.datatype.VerificatorConstructor;
 import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
-import de.fzi.dbs.verification.event.datatype.ValueProblem;
-import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.EntryLocator;
 import de.fzi.dbs.verification.event.VerificationEvent;
 import de.fzi.dbs.verification.event.VerificationEventLocator;
-import de.fzi.dbs.verification.event.structure.NonExpectedClassProblem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -164,9 +161,9 @@ public class VerifierGenerator extends ClassBasedGenerator
    */
   protected JMethod generateFieldCheck(final FieldUse fieldUse)
   {
-    /// check<Name>(locator, handler, master, value)
+    /// check<Name>(parentLocator, handler, master, value)
     final JMethod fieldCheck = theClass.method(JMod.PUBLIC, codeModel.VOID, "check" + fieldUse.name);
-    final JVar locator = fieldCheck.param(codeModel.ref(VerificationEventLocator.class), "locator");
+    final JVar parentLocator = fieldCheck.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
     final JVar handler = fieldCheck.param(codeModel.ref(ValidationEventHandler.class), "handler");
     final JVar master = fieldCheck.param(classContext.ref, "master");
 
@@ -176,9 +173,11 @@ public class VerifierGenerator extends ClassBasedGenerator
     final String fieldParamName = fieldUse.multiplicity.isAtMostOnce() ? "value" : "values";
     final JVar value = fieldCheck.param(fieldParamType, fieldParamName);
 
+    final JExpression locator = JExpr._new(classContext.parent.getCodeModel().ref(VerificationEventLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name));
+
     final JStatement statement = fieldUse.multiplicity.isAtMostOnce() ?
       generateSingleValueCheck(fieldUse, locator, handler, master, value, fieldParamType) :
-      generateCollectionValueCheck(fieldUse, locator, handler, master, value);
+      generateCollectionValueCheck(fieldUse, parentLocator, handler, master, value);
 
     fieldCheck.body().add(statement);
 
@@ -228,15 +227,17 @@ public class VerifierGenerator extends ClassBasedGenerator
   /**
    * Generates collection value check.
    *
-   * @param fieldUse the field.
-   * @param locator  locator.
-   * @param handler  handler.
-   * @param master   master.
-   * @param values   the collection.
+   * @param fieldUse      the field.
+   * @param parentLocator parentLocator.
+   * @param handler       handler.
+   * @param master        master.
+   * @param values        the collection.
    * @return Statement for collection check.
    */
-  protected JStatement generateCollectionValueCheck(final FieldUse fieldUse, final JExpression locator, final JExpression handler, final JExpression master, final JExpression values)
+  protected JStatement generateCollectionValueCheck(final FieldUse fieldUse, final JExpression parentLocator, final JExpression handler, final JExpression master, final JExpression values)
   {
+    final JMethod entryCheck = generateCollectionValueEntryCheck(fieldUse);
+
     final JBlock block = JBlock.dummyInstance.block();
     final JForLoop _for = block._for();
     final JVar index = _for.init(codeModel.INT, "index", JExpr.lit(0));
@@ -244,9 +245,23 @@ public class VerifierGenerator extends ClassBasedGenerator
     _for.update(JOp.incr(index));
     final JType objectClass = codeModel.ref(Object.class);
     final JVar item = _for.body().decl(objectClass, "item", JExpr.invoke(values, "get").arg(index));
-    final JExpression entryLocator = JExpr._new(codeModel.ref(EntryLocator.class)).arg(locator).arg(index);
-    _for.body().add(generateSingleValueCheck(fieldUse, entryLocator, handler, master, item, objectClass));
+    _for.body().invoke(entryCheck).arg(parentLocator).arg(handler).arg(master).arg(index).arg(item);
     return block;
+  }
+
+  protected JMethod generateCollectionValueEntryCheck(final FieldUse fieldUse)
+  {
+    final JType objectClass = codeModel.ref(Object.class);
+    /// check<Name>(locator, handler, master, value)
+    final JMethod check = theClass.method(JMod.PUBLIC, codeModel.VOID, "check" + fieldUse.name);
+    final JVar parentLocator = check.param(codeModel.ref(VerificationEventLocator.class), "parentLocator");
+    final JVar handler = check.param(codeModel.ref(ValidationEventHandler.class), "handler");
+    final JVar master = check.param(classContext.ref, "master");
+    final JVar index = check.param(codeModel.INT, "index");
+    final JVar value = check.param(objectClass, "value");
+    final JExpression entryLocator = JExpr._new(codeModel.ref(EntryLocator.class)).arg(parentLocator).arg(master).arg(JExpr.lit(fieldUse.name)).arg(index);
+    check.body().add(generateSingleValueCheck(fieldUse, entryLocator, handler, master, value, objectClass));
+    return check;
   }
 
   /**

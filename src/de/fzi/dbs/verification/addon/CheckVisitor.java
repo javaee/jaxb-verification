@@ -128,7 +128,7 @@ public class CheckVisitor extends BGMExpressionVisitor
   {
     final JBlock block = JBlock.dummyInstance.block();
 
-    final JExpression locator = JExpr._new(classContext.parent.getCodeModel().ref(VerificationEventLocator.class)).arg(this.parentLocator).arg(master).arg(JExpr.lit(fieldItem.name));
+//    final JExpression locator = JExpr._new(classContext.parent.getCodeModel().ref(VerificationEventLocator.class)).arg(this.parentLocator).arg(master).arg(JExpr.lit(fieldItem.name));
 
     final FieldUse fieldUse = classContext.target.getField(fieldItem.name);
 
@@ -218,7 +218,7 @@ public class CheckVisitor extends BGMExpressionVisitor
         ifNotNull.directStatement("// Check value");
         checkBlock = ifNotNull;
       }
-      checkBlock.invoke("check" + fieldUse.name).arg(locator).arg(handler).arg(master).
+      checkBlock.invoke("check" + fieldUse.name).arg(parentLocator).arg(handler).arg(master).
         arg((fieldUse.multiplicity.isAtMostOnce() && fieldUse.type.isPrimitive()) ?
         ((JPrimitiveType) fieldUse.type).wrap(field) : field);
     }
