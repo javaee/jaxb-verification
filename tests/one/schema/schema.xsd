@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+
+  jaxb:version="1.0">
+
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="de.fzi.dbs.verification.tests.one"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+
+  <xs:element name="root" type="rootType"/>
+
+  <xs:complexType name="rootType">
+    <xs:sequence>
+      <xs:element name="sequence" type="sequenceType" minOccurs="0"/>
+
+      <xs:element name="elementWithListAttribute1" type="elementWithListAttribute1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+
+  <xs:complexType name="sequenceType">
+    <xs:sequence>
+      <xs:element name="a" type="xs:string"/>
+      <xs:element name="b" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="elementWithListAttribute1">
+    <xs:attribute name="list1" type="listType1" use="optional"/>
+  </xs:complexType>
+
+  <xs:simpleType name="listType1">
+    <xs:list itemType="patternType1"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="patternType1">
+    <xs:restriction base="xs:string">
+      <xs:length value="9"/>
+      <xs:pattern value="[A-Z]{2}([0-9]|[A-Z]){7}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema> 

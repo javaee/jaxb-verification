@@ -12,6 +12,8 @@ by Aleksei Valikov, valikov@fzi.de
 
   <property name="name" value="jaxb-verification"/>
   <property name="dist" location="${basedir}/dist"/>
+  <property name="doc.dir" location="${basedir}/doc"/>
+  <property name="doc.api.dir" location="${doc.dir}/api"/>
   <property name="lib.dir" location="${basedir}/lib"/>
   <property name="template.dir" location="${basedir}/template"/>
   <property name="jar.name" value="${name}"/>
@@ -21,6 +23,7 @@ by Aleksei Valikov, valikov@fzi.de
 
   <path id="compile.lib.path">
     <fileset dir="${lib.dir}/jakarta-commons">
+      <include name="commons-lang.jar"/>
       <include name="commons-logging.jar"/>
     </fileset>
     <fileset dir="${lib.dir}/hyperjaxb">
@@ -31,6 +34,7 @@ by Aleksei Valikov, valikov@fzi.de
       <include name="jaxb-impl.jar"/>
       <include name="jaxb-libs.jar"/>
       <include name="jaxb-xjc.jar"/>
+      <include name="relaxngDatatype.jar"/>
       <include name="xsdlib.jar"/>
     </fileset>
     <fileset dir="${lib.dir}/junit">
@@ -53,6 +57,34 @@ by Aleksei Valikov, valikov@fzi.de
       classpathref="compile.lib.path"/>
   </target>
 
+  <target name="javadoc">
+    <javadoc
+      classpathref="compile.lib.path"
+      destdir="${doc.api.dir}"
+      use="true"
+      protected="true"
+      version="true"
+      windowtitle="JAXB Verification API Documentation"
+      doctitle="JAXB Verification API Documentation"
+      stylesheetfile="${doc.api.dir}/style/style.css">
+
+      <packageset dir="${src}" defaultexcludes="yes">
+        <include name="de/**"/>
+      </packageset>
+
+      <group title="Verification API">
+        <package name="de.fzi.dbs.verification"/>
+        <package name="de.fzi.dbs.verification.event.*"/>
+        <package name="de.fzi.dbs.verification.util"/>
+      </group>
+
+      <group title="Add-On API">
+        <package name="de.fzi.dbs.verification.addon.*"/>
+      </group>
+    </javadoc>
+  </target>
+
+
   <target name="jar" depends="compile">
     <jar jarfile="${dist}/${jar.name}.jar" basedir="${classes}">
       <metainf dir="${meta-inf}"/>
@@ -62,6 +94,7 @@ by Aleksei Valikov, valikov@fzi.de
   <target name="dist" depends="jar">
     <copy todir="www/doc">
       <fileset dir="doc">
+        <include name="api/**"/>
         <include name="reference/**"/>
         <exclude name="reference/support/**"/>
         <exclude name="**/*.xml"/>
