@@ -257,7 +257,7 @@ public class ExistsVisitor extends BGMExpressionVisitor
       }
       else
       {
-        return JOp.cor(JOp.cand(left, JOp.not(right)), JOp.cand(JOp.not(left), right));
+        return JOp.xor(left, right);
       }
     }
   }
