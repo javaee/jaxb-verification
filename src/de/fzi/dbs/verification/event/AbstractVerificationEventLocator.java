@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import de.fzi.dbs.verification.Reportable;
 
 /**
+ * Abstract base class for event locators.
  * @author Aleksei Valikov
  */
 public abstract class AbstractVerificationEventLocator implements ValidationEventLocatorEx, Reportable
@@ -85,6 +86,10 @@ public abstract class AbstractVerificationEventLocator implements ValidationEven
     return null;
   }
 
+  /**
+   * Returns expression step (for EL and JXPath expressions).
+   * @return Expression step.
+   */
   public abstract String getStep();
 
   /**

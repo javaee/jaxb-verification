@@ -60,7 +60,7 @@ public class ValidationUtils
 
   private static void appendEscaped(final StringBuffer buf, final char ch1, final char ch2)
   {
-    final int ucs = (((int) (ch1 & 0x3FF)) << 10) + (ch2 & 0x3FF);
+    final int ucs = ((ch1 & 0x3FF) << 10) + (ch2 & 0x3FF);
 
     appendByte(buf, 0xF0 + (ucs >> 18));
     appendByte(buf, 0x80 + ((ucs >> 12) % 64));

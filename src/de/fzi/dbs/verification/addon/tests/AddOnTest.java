@@ -32,6 +32,6 @@ public class AddOnTest extends AbstractAddOnTest
 
   public String[] getAddonOptions()
   {
-    return new String[]{"-nv", "-extension", "-Xverification"};
+    return new String[]{"-nv", "-extension", "-Xverification", "-Xequality"};
   }
 }

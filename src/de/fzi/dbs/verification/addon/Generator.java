@@ -19,7 +19,7 @@ public abstract class Generator
    * Generation template. Generates class {@link #generateClass()}, fields {@link #generateFields()}
    * and methods {@link #generateMethods()}.
    */
-  protected void generate()
+  public void generate()
   {
     theClass = generateClass();
     generateFields();
