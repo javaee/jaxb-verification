@@ -63,7 +63,9 @@
           <root url="jar://$MODULE_DIR$/lib/hyperjaxb/hyperjaxb.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../hyperjaxb/src" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -144,7 +146,9 @@
           <root url="jar://$MODULE_DIR$/lib/jaxb/jaxb-xjc.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://C:/Lib/jaxb/jaxb-ri-20041115/src" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">

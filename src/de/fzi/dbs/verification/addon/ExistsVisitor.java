@@ -76,6 +76,11 @@ public class ExistsVisitor extends BGMExpressionVisitor
       // We can't check if primitive value was set or not, so we'll assume it always is set.
       return JExpr.TRUE;
     }
+    if (null == getter)
+    {
+      // Fixed field - always set
+      return JExpr.TRUE;
+    }
     else
     {
       final JExpression notNull = JOp.ne(JExpr._null(), JExpr.invoke(master, getter));
