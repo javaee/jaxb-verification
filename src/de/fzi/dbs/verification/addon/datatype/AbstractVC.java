@@ -1,6 +1,8 @@
 package de.fzi.dbs.verification.addon.datatype;
 
 import com.sun.codemodel.JBlock;
+import com.sun.codemodel.JExpression;
+import com.sun.codemodel.JCodeModel;
 
 /**
  * Abstract verification constructor. Provides an utility {@link #newBlock} method.
@@ -16,4 +18,9 @@ public abstract class AbstractVC implements VerificatorConstructor
   {
     return JBlock.dummyInstance.block();
   }
+
+//  public JExpression create(Object object, JCodeModel codeModel)
+//  {
+//    return null;
+//  }
 }
