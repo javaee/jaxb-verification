@@ -74,11 +74,13 @@ by Aleksei Valikov, valikov@fzi.de
 
       <group title="Verification API">
         <package name="de.fzi.dbs.verification"/>
+        <package name="de.fzi.dbs.verification.event"/>
         <package name="de.fzi.dbs.verification.event.*"/>
         <package name="de.fzi.dbs.verification.util"/>
       </group>
 
       <group title="Add-On API">
+        <package name="de.fzi.dbs.verification.addon"/>
         <package name="de.fzi.dbs.verification.addon.*"/>
       </group>
     </javadoc>
@@ -114,6 +116,7 @@ by Aleksei Valikov, valikov@fzi.de
         <include name="lib/**"/>
         <include name="src/**"/>
         <include name="tests/*/samples/**"/>
+        <include name="tests/*/src/**"/>
         <include name="tests/*/schema/**"/>
         <include name="tests/*/binding/**"/>
         <include name="tests/build.xml"/>
