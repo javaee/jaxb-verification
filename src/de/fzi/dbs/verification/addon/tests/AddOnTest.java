@@ -4,6 +4,8 @@ import de.fzi.dbs.jaxb.addon.test.AbstractAddOnTest;
 
 
 /**
+ * Add-on test.
+ *
  * @author Aleksei Valikov
  */
 public class AddOnTest extends AbstractAddOnTest

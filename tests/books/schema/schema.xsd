@@ -32,8 +32,14 @@
    </xs:element>
    <xs:element name="description" type="xs:string"  minOccurs="0"/>
    <xs:choice>
-     <xs:element name="Discount" type="xs:string" />
-     <xs:element name="None" type="xs:string" minOccurs="0"/>
+     <xs:sequence>
+       <xs:element name="a1" type="xs:string" />
+       <xs:element name="b1" type="xs:string"/>
+     </xs:sequence>
+     <xs:sequence>
+       <xs:element name="a1" type="xs:string" />
+       <xs:element name="c1" type="xs:string"/>
+     </xs:sequence>
    </xs:choice>
    <xs:choice maxOccurs="unbounded">
      <xs:element name="A" type="xs:int" />

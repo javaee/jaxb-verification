@@ -2,6 +2,7 @@ package de.fzi.dbs.verification.datatype.problem;
 
 /**
  * Positive value.
+ *
  * @author Aleksei Valikov
  */
 public class PositiveProblem extends SignProblem

@@ -2,6 +2,7 @@ package de.fzi.dbs.verification.datatype.problem;
 
 /**
  * Invalid ncname.
+ *
  * @author Aleksei Valikov
  */
 public class NcnameProblem extends StringFormatProblem

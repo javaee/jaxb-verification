@@ -32,7 +32,5 @@ public abstract class ClassBasedGenerator extends Generator
     this.classContext = classContext;
   }
 
-  
-
 
 }

@@ -23,7 +23,7 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
   protected final Object object;
 
   /**
-   * Field name
+   * Field name.
    */
   protected final String fieldName;
 
@@ -39,6 +39,16 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
     this.object = object;
     this.fieldName = fieldName;
     this.parentLocator = parentLocator;
+  }
+
+  /**
+   * Returns parent locator.
+   * 
+   * @return Parent locator.
+   */
+  public VerificationEventLocator getParentLocator()
+  {
+    return parentLocator;
   }
 
   public Object getObject()
@@ -87,4 +97,33 @@ public class VerificationEventLocator implements ValidationEventLocatorEx
     return sb.toString();
   }
 
+  /**
+   * Returns step for this locator. The step is a single part of location expression.
+   *
+   * @return Step for this locator.
+   */
+  public String getStep()
+  {
+    return getFieldName();
+  }
+
+  /**
+   * Returns EL-style expression identifying location.
+   *
+   * @return EL-style expression identifying location.
+   */
+  public String getELExpression()
+  {
+    return ((null == getParentLocator()) ? "" : getParentLocator().getELExpression() + ".") + getStep();
+  }
+
+  /**
+   * Returns XPath-expression identifying location.
+   *
+   * @return XPath-expression identifying location.
+   */
+  public String getXPath()
+  {
+    return ((null == getParentLocator()) ? "" : getParentLocator().getXPath() + "/") + getStep();
+  }
 }

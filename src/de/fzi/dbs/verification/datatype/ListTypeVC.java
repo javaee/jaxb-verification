@@ -1,5 +1,6 @@
 package de.fzi.dbs.verification.datatype;
 
+import com.sun.codemodel.JAssignmentTarget;
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpr;
@@ -8,7 +9,6 @@ import com.sun.codemodel.JForLoop;
 import com.sun.codemodel.JOp;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JVar;
-import com.sun.codemodel.JAssignmentTarget;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.ListType;
 

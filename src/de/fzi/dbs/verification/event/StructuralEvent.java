@@ -3,19 +3,17 @@ package de.fzi.dbs.verification.event;
 import de.fzi.dbs.verification.problem.Problem;
 
 /**
- * Datatype event describes a problem with data.
- *
+ * Structural event describes problems with object structure.
  * @author Aleksei Valikov
  */
-public class DatatypeEvent extends VerificationEvent
+public class StructuralEvent extends VerificationEvent
 {
   /**
-   * Constructs a new datatype event.
-   *
+   * Constructs a new structural event.
    * @param locator locator (where).
    * @param problem problem (what).
    */
-  public DatatypeEvent(final VerificationEventLocator locator, final Problem problem)
+  public StructuralEvent(final VerificationEventLocator locator, final Problem problem)
   {
     super(locator, problem);
   }

@@ -9,6 +9,7 @@ public class AnyURIProblem extends StringFormatProblem
 {
   /**
    * Constructs a new problem description.
+   *
    * @param value value.
    */
   public AnyURIProblem(final Object value)

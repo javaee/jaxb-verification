@@ -5,7 +5,7 @@ package de.fzi.dbs.verification.datatype.problem;
  *
  * @author Aleksei Valikov
  */
-public class RangeViolationProblem extends Problem
+public class RangeViolationProblem extends ValueProblem
 {
   /**
    * Limiting value.
@@ -23,4 +23,20 @@ public class RangeViolationProblem extends Problem
     super(value);
     this.limitValue = limitValue;
   }
+
+  /**
+   * Returns limiting value.
+   *
+   * @return Limiting value.
+   */
+  public Object getLimitValue()
+  {
+    return limitValue;
+  }
+
+  public Object[] getMessageParameters()
+  {
+    return new Object[]{getValue(), getLimitValue()};
+  }
+
 }

@@ -1,9 +1,12 @@
 package de.fzi.dbs.verification.datatype.problem;
 
+import de.fzi.dbs.verification.problem.*;
+
 /**
  * Descrribes a problem with a certain value.
  */
-public abstract class Problem extends Exception
+public abstract class ValueProblem
+  extends de.fzi.dbs.verification.problem.Problem
 {
   /**
    * Value that causes the problem.
@@ -15,7 +18,7 @@ public abstract class Problem extends Exception
    *
    * @param value value that causes the problem.
    */
-  public Problem(final Object value)
+  public ValueProblem(final Object value)
   {
     this.value = value;
   }
@@ -28,16 +31,6 @@ public abstract class Problem extends Exception
   public Object getValue()
   {
     return value;
-  }
-
-  /**
-   * Returns code of the problem. By default, code of the problem is problem's class name.
-   *
-   * @return String code that uniquely identifies this problem. May be used to reference messages.
-   */
-  public String getCode()
-  {
-    return getClass().getName();
   }
 
   /**

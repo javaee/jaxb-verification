@@ -5,7 +5,7 @@ package de.fzi.dbs.verification.datatype.problem;
  *
  * @author Aleksei Valikov
  */
-public abstract class LengthProblem extends Problem
+public abstract class LengthProblem extends ValueProblem
 {
   /**
    * Effective length of the value.

@@ -7,7 +7,7 @@ import org.apache.commons.lang.Validate;
  *
  * @author Aleksei Valikov
  */
-public abstract class StringFormatProblem extends Problem
+public abstract class StringFormatProblem extends ValueProblem
 {
   /**
    * Constructs a new string format problem. Value must be a string.

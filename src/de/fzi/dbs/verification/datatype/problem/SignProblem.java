@@ -3,10 +3,10 @@ package de.fzi.dbs.verification.datatype.problem;
 import org.apache.commons.lang.Validate;
 
 /**
- * Problem with a value sign - a numeric value has a wrong sign.
+ * ValueProblem with a value sign - a numeric value has a wrong sign.
  * The value for this problem must be a {@link Number}.
  */
-public class SignProblem extends Problem
+public class SignProblem extends ValueProblem
 {
   /**
    * Constructs a new sign problem.
