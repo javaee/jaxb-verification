@@ -29,4 +29,10 @@ public class DurationTypeVC extends AbstractVC implements ComparatorVC
   {
     return JExpr.invoke(JExpr.cast(codeModel.ref(ITimeDurationValueType.class), o1), "lengthValid").arg(JExpr.cast(codeModel.ref(ITimeDurationValueType.class), o2));
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    // todo: ???
+    return JExpr.lit(object.toString());
+  }
 }

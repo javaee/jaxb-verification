@@ -320,6 +320,11 @@ public class VerifierGenerator extends ClassBasedGenerator
   {
     final JBlock block = JBlock.dummyInstance.block();
     final DatabindableDatatype guard = item.guard;
+    if (!item.xducer.isBuiltin())
+    {
+      block.directStatement("// Custom type conversion is defined, no check is possible");
+    }
+    else
     if (guard instanceof XSDatatype && ((XSDatatype) guard).isAlwaysValid())
     {
       block.directStatement("// Primitive value is always valid, nothing to check");

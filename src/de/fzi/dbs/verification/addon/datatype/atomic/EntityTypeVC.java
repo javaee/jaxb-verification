@@ -6,6 +6,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
 import com.sun.msv.datatype.DatabindableDatatype;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
 
@@ -21,5 +22,10 @@ public class EntityTypeVC extends AbstractVC
     final JBlock block = newBlock();
     block.directStatement("// todo: validate entity type. How?");
     return block;
+  }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr.lit(object.toString());
   }
 }

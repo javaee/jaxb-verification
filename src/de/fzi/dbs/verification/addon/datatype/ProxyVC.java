@@ -20,4 +20,12 @@ public class ProxyVC extends AbstractVC
       = VerificatorConstructorFactory.getVerificatorConstructor(proxy.getBaseType());
     return vc.verify(proxy.getBaseType(), codeModel, theClass, value, problem);
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    final Proxy proxy = (Proxy) datatype;
+    final VerificatorConstructor vc
+      = VerificatorConstructorFactory.getVerificatorConstructor(proxy.getBaseType());
+    return vc.create(proxy.getBaseType(), codeModel, object);
+  }
 }

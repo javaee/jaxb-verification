@@ -5,6 +5,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
 import com.sun.msv.datatype.DatabindableDatatype;
 
 /**
@@ -25,5 +26,14 @@ public interface VerificatorConstructor
    * @return Value verification statement.
    */
   public JStatement verify(DatabindableDatatype datatype, JCodeModel codeModel, JDefinedClass theClass, JExpression value, JAssignmentTarget problem);
+
+  /**
+   * Returns expression that synamically creates an object.
+   * @param datatype
+   * @param codeModel code model.
+   * @param object compile-time object to be created in the runtime.
+   * @return Creates an expression that will dynamically instantiate given object in the runtime.
+   */
+  public JExpression create(DatabindableDatatype datatype, JCodeModel codeModel, Object object);
 
 }

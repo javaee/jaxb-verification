@@ -7,6 +7,7 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JPrimitiveType;
 import com.sun.msv.datatype.DatabindableDatatype;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
 import de.fzi.dbs.verification.addon.datatype.ComparatorVC;

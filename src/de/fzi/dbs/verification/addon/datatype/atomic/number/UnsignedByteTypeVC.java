@@ -32,4 +32,10 @@ public class UnsignedByteTypeVC extends ShortTypeVC
     return block;
   }
 
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr._new(codeModel.ref(Short.class)).arg(JExpr.lit(((Short) object).shortValue()));
+  }
+
+
 }

@@ -7,14 +7,17 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.MockControl;
-import org.easymock.ArgumentsMatcher;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 /**
- * Abstract base class for verifier tests.
+ * Abstract base class for verifier tests. Implementations must implement
+ * {@link #getObjects()} method to return array of objects to be validated and
+ * {@link #getEvents()} method to return array of event lists that must be reported.
+ * The {@link #testValidation()} method checks that validation of each of the objects
+ * reports the expected events.
  *
  * @author Aleksei Valikov
  */
@@ -46,7 +49,8 @@ public abstract class AbstractVerifierTest extends TestCase
   }
 
   /**
-   * Tests validation.
+   * Performs validation tests. This method iterates over the {@link #getObjects()},
+   * validates each of the items and checks all the predefined problems are reported.
    */
   public void testValidation()
   {

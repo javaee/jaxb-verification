@@ -42,4 +42,12 @@ public abstract class DataTypeWithFacetVC extends AbstractVC
    * @return Facet verification statement.
    */
   public abstract JStatement diagnoseByFacet(DataTypeWithFacet datatype, JCodeModel codeModel, JDefinedClass theClass, JExpression value, JAssignmentTarget problem);
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    final DataTypeWithFacet dataTypeWithFacet = (DataTypeWithFacet) datatype;
+    final XSDatatype baseType = dataTypeWithFacet.baseType;
+    final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(baseType);
+    return vc.create(baseType, codeModel, object);
+  }
 }

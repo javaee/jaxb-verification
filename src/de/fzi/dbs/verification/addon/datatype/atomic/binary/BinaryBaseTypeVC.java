@@ -6,6 +6,8 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JArray;
 import com.sun.msv.datatype.DatabindableDatatype;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
 import de.fzi.dbs.verification.addon.datatype.DiscreteVC;
@@ -26,5 +28,16 @@ public abstract class BinaryBaseTypeVC extends AbstractVC implements DiscreteVC
   public JExpression countLength(final JCodeModel codeModel, final JExpression value)
   {
     return value.ref("length");
+  }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    final JArray array = JExpr.newArray(codeModel.BYTE);
+    final byte[] bytes = (byte[]) object;
+    for (int index = 0; index < bytes.length; index++)
+    {
+      array.add(JExpr.lit(bytes[index]));
+    }
+    return array;
   }
 }

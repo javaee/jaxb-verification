@@ -31,4 +31,10 @@ public class UnsignedIntTypeVC extends de.fzi.dbs.verification.addon.datatype.at
       JExpr._new(codeModel.ref(GreaterProblem.class)).arg(value).arg(JExpr._new(codeModel.ref(Long.class)).arg(JExpr.lit(4294967295L))));
     return block;
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr._new(codeModel.ref(Long.class)).arg(JExpr.lit(((Long) object).longValue()));
+  }
+
 }

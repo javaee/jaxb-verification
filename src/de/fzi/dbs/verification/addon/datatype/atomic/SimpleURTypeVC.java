@@ -21,4 +21,10 @@ public class SimpleURTypeVC extends AbstractVC
     final JBlock block = newBlock();
     return block;
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    // todo: serialize???
+    return null;
+  }
 }

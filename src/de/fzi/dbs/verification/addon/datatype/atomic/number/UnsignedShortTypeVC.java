@@ -32,4 +32,10 @@ public class UnsignedShortTypeVC extends de.fzi.dbs.verification.addon.datatype.
     return block;
   }
 
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr._new(codeModel.ref(Integer.class)).arg(JExpr.lit(((Integer) object).intValue()));
+  }
+
+
 }

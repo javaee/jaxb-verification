@@ -1,11 +1,11 @@
 package de.fzi.dbs.verification.event.structure;
 
-import de.fzi.dbs.verification.event.structure.*;
+
 
 /**
  * Wrong class problem.
  */
-public class WrongClassProblem extends de.fzi.dbs.verification.event.structure.NonExpectedClassProblem
+public class WrongClassProblem extends NonExpectedClassProblem
 {
   /**
    * Expected class.
@@ -32,5 +32,10 @@ public class WrongClassProblem extends de.fzi.dbs.verification.event.structure.N
   public Class getExpectedClass()
   {
     return expectedClass;
+  }
+
+  public Object[] getMessageParameters()
+  {
+    return new Object[]{getEffectiveClass(), getExpectedClass()};
   }
 }

@@ -22,4 +22,9 @@ public class ErrorTypeVC extends AbstractVC
     block.directStatement("// Fallback type: no validation rules");
     return block;
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return null;
+  }
 }

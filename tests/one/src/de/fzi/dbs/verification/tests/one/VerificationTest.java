@@ -1,8 +1,8 @@
 package de.fzi.dbs.verification.tests.one;
 
 import de.fzi.dbs.verification.ObjectVerifier;
-import de.fzi.dbs.verification.tests.one.impl.RootImpl;
 import de.fzi.dbs.verification.tests.one.impl.ElementWithListAttribute1Impl;
+import de.fzi.dbs.verification.tests.one.impl.RootImpl;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -36,4 +36,9 @@ public class AnyURITypeVC extends AbstractVC implements DiscreteVC
   {
     return codeModel.ref(UnicodeUtil.class).staticInvoke("countLength").arg(value);
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr.lit(object.toString());
+  }
 }

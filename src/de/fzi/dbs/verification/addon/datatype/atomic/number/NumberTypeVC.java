@@ -11,6 +11,9 @@ import com.sun.msv.datatype.DatabindableDatatype;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
 import de.fzi.dbs.verification.addon.datatype.ComparatorVC;
 
+import java.math.BigInteger;
+import java.math.BigDecimal;
+
 /**
  * VC for decimal type.
  *
@@ -28,4 +31,11 @@ public class NumberTypeVC extends AbstractVC implements ComparatorVC
   {
     return JExpr.invoke(JExpr.cast(codeModel.ref(Comparable.class), o1), "compareTo").arg(o2);
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    final BigDecimal bigDecimal = (BigDecimal) object;
+    return JExpr._new(codeModel.ref(BigDecimal.class)).arg(JExpr.lit(bigDecimal.toString()));
+  }
+
 }

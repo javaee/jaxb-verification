@@ -29,4 +29,9 @@ public class StringTypeVC extends AbstractVC implements DiscreteVC
   {
     return JOp.cond(JOp.eq(JExpr._null(), value), JExpr.lit(0), JExpr.invoke(value, "length"));
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    return JExpr.lit(object.toString());
+  }
 }

@@ -21,4 +21,16 @@ public class BooleanTypeVC extends AbstractVC
     final JBlock block = newBlock();
     return block;
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    if (Boolean.TRUE.equals(object))
+    {
+      return codeModel.ref(Boolean.class).staticRef("TRUE");
+    }
+    else
+    {
+      return codeModel.ref(Boolean.class).staticRef("FALSE");
+    }
+  }
 }

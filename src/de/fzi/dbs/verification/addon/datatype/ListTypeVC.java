@@ -38,4 +38,10 @@ public class ListTypeVC extends AbstractVC
     _for.body().directStatement("// Add current problem to the list of problems");
     return block;
   }
+
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    // todo: how?
+    return null;
+  }
 }

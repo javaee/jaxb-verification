@@ -39,4 +39,10 @@ public class UnionTypeVC extends AbstractVC
     return block;
   }
 
+  public JExpression create(final DatabindableDatatype datatype, final JCodeModel codeModel, final Object object)
+  {
+    // todo: how?
+    return null;
+  }
+
 }

@@ -1,12 +1,14 @@
 package de.fzi.dbs.verification.event.datatype;
 
+import de.fzi.dbs.verification.event.Problem;
+
 import java.util.ResourceBundle;
 
 /**
  * Descrribes a problem with a certain value.
  */
 public abstract class ValueProblem
-  extends de.fzi.dbs.verification.event.Problem
+  extends Problem
 {
   /**
    * Value that causes the problem.
