@@ -191,7 +191,7 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
   public boolean equals(final Object obj)
   {
     boolean result = false;
-    if (obj != null && getClass().equals(obj.getClass()))
+    if (obj instanceof VerificationEventLocator && !(obj instanceof EntryLocator))
     {
       final VerificationEventLocator locator = (VerificationEventLocator) obj;
       result = (getObject() == locator.getObject()) &&
