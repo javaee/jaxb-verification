@@ -346,18 +346,23 @@ public class CheckVisitor extends BGMExpressionVisitor
     else
     {
       block.directStatement("// Choice");
-      final JConditional lnr = block._if(JOp.not(rightExists));
-      lnr._then().directStatement("// If right does not exist, left must exist");
-      lnr._then().add((JBlock) exp.exp1.visit(this));
+      block.directStatement("// If right exists");
+      final JConditional r = block._if(rightExists);
+      r._then().directStatement("// Right left");
+      r._then().add((JBlock) exp.exp2.visit(this));
+      r._then().directStatement("// todo: check left does not exists???");
+      r._else().directStatement("// Right does not exist, left must exist");
+      r._else().add((JBlock) exp.exp1.visit(this));
 
-      final JConditional nlr = block._if(JOp.not(leftExists));
-      nlr._then().directStatement("// If left does not exist, right must exist");
-      nlr._then().add((JBlock) exp.exp2.visit(this));
-
-      final JConditional nlnr = block._if(leftExists);
-      nlnr._then().directStatement("// If left exists, right must not exist");
-      nlnr._then().add((JBlock) exp.exp1.visit(this));
-      nlnr._then().directStatement("// todo: check that right is absent. how?");
+//      final JConditional lnr = block._if(JOp.not(rightExists));
+//      lnr._then().directStatement("// If right does not exist, left must exist");
+//      lnr._then().add((JBlock) exp.exp1.visit(this));
+//
+//
+//      final JConditional nlnr = block._if(leftExists);
+//      nlnr._then().directStatement("// If left exists, right must not exist");
+//      nlnr._then().add((JBlock) exp.exp1.visit(this));
+//      nlnr._then().directStatement("// todo: check that right is absent. how?");
     }
     return block;
   }
