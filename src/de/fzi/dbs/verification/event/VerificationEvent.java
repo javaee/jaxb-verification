@@ -126,4 +126,28 @@ public class VerificationEvent implements ValidationEvent
       return MessageFormat.format("Location:\n{0}\nProblem:\n{1}", messageParameters);
     }
   }
+
+  public int hashCode()
+  {
+    return getLinkedException().hashCode() + getLocator().hashCode() * 37;
+  }
+
+  public boolean equals(Object obj)
+  {
+    boolean result = false;
+    if (obj instanceof ValidationEvent)
+    {
+      final ValidationEvent event = (ValidationEvent) obj;
+      result = (getSeverity() == event.getSeverity()) &&
+        (getLocator().equals(event.getLocator())) &&
+        (getLinkedException().equals(event.getLinkedException()));
+
+    }
+      return result;
+  }
+
+  public String toString()
+  {
+    return getMessage();
+  }
 }

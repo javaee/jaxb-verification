@@ -9,6 +9,7 @@ import com.sun.codemodel.JForLoop;
 import com.sun.codemodel.JOp;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JVar;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.ListType;
 
@@ -17,7 +18,7 @@ import com.sun.msv.datatype.xsd.ListType;
  */
 public class ListTypeVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final ListType listType = (ListType) datatype;
     final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(listType.itemType);
@@ -32,7 +33,7 @@ public class ListTypeVC extends AbstractVC
     final JVar current = _for.body().decl(codeModel.ref(listType.itemType.getJavaObjectType()),
       "current", value.component(index));
     final JVar currentProblem = _for.body().decl(codeModel.ref(Object.class), "currentProblem");
-    _for.body().add(vc.verify(listType.itemType, codeModel, current, currentProblem));
+    _for.body().add(vc.verify(listType.itemType, codeModel, theClass, current, currentProblem));
 
     _for.body().directStatement("// Add current problem to the list of problems");
     return block;

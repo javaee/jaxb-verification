@@ -5,6 +5,7 @@ import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.DataTypeWithFacet;
 import com.sun.msv.datatype.xsd.XSDatatype;
@@ -19,14 +20,14 @@ import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
  */
 public abstract class DataTypeWithFacetVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final DataTypeWithFacet dataTypeWithFacet = (DataTypeWithFacet) datatype;
     final XSDatatype baseType = dataTypeWithFacet.baseType;
     final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(baseType);
-    block.add(vc.verify(baseType, codeModel, value, problem));
-    block.add(diagnoseByFacet(dataTypeWithFacet, codeModel, value, problem));
+    block.add(vc.verify(baseType, codeModel, theClass, value, problem));
+    block.add(diagnoseByFacet(dataTypeWithFacet, codeModel, theClass, value, problem));
     return block;
   }
 
@@ -35,9 +36,10 @@ public abstract class DataTypeWithFacetVC extends AbstractVC
    *
    * @param datatype  datatype.
    * @param codeModel code model.
+   * @param theClass
    * @param value     value.
    * @param problem   problem variable.
    * @return Facet verification statement.
    */
-  public abstract JStatement diagnoseByFacet(DataTypeWithFacet datatype, JCodeModel codeModel, JExpression value, JAssignmentTarget problem);
+  public abstract JStatement diagnoseByFacet(DataTypeWithFacet datatype, JCodeModel codeModel, JDefinedClass theClass, JExpression value, JAssignmentTarget problem);
 }

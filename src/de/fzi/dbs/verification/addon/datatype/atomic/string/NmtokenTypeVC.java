@@ -7,6 +7,7 @@ import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.XmlNames;
 import de.fzi.dbs.verification.event.datatype.NmtokenProblem;
@@ -18,7 +19,7 @@ import de.fzi.dbs.verification.event.datatype.NmtokenProblem;
  */
 public class NmtokenTypeVC extends TokenTypeVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JConditional ifValueIsNmtoken = block._if(codeModel.ref(XmlNames.class).staticInvoke("isNmtoken").arg(value));

@@ -1,6 +1,7 @@
 package de.fzi.dbs.verification.event;
 
 import de.fzi.dbs.verification.Reportable;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
@@ -66,4 +67,31 @@ public abstract class Problem extends Exception implements Reportable
    * @return Default resource bundle.
    */
   public abstract ResourceBundle getDefaultResourceBundle();
+
+  public boolean equals(Object obj)
+  {
+    boolean result = false;
+    if (obj instanceof Problem)
+    {
+      final Problem problem = (Problem) obj;
+      result = ArrayUtils.isEquals(getMessageParameters(), problem.getMessageParameters());
+    }
+    return result;
+  }
+
+  public int hashCode()
+  {
+    int hashCode = 0;
+    final Object[] messageParameters = getMessageParameters();
+    for (int index = 0; index < messageParameters.length; index++)
+    {
+      hashCode = hashCode * 31 + messageParameters[index].hashCode();
+    }
+    return hashCode;
+  }
+
+  public String toString()
+  {
+    return getMessage();
+  }
 }

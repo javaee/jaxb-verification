@@ -315,7 +315,7 @@ public class VerifierGenerator extends ClassBasedGenerator
       {
         block.directStatement("// Checking " + guard.getClass() + " datatype");
         final JVar problem = block.decl(codeModel.ref(de.fzi.dbs.verification.event.datatype.ValueProblem.class), "problem", JExpr._null());
-        block.add(vc.verify(guard, codeModel, value, problem));
+        block.add(vc.verify(guard, codeModel, theClass, value, problem));
         final JConditional ifProblemIsNotNull = block._if(JOp.ne(JExpr._null(), problem));
         ifProblemIsNotNull._then().directStatement("// Handle event");
         ifProblemIsNotNull._then().invoke(handler, "handleEvent").arg(JExpr._new(codeModel.ref(VerificationEvent.class)).arg(locator).arg(problem));

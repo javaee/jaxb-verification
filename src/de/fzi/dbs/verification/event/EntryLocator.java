@@ -60,19 +60,7 @@ public class EntryLocator extends VerificationEventLocator
     return getFieldName() + "[" + getIndex() + "]";
   }
 
-  public String toString()
-  {
-    final StringBuffer sb = new StringBuffer();
-    sb.append("Object [");
-    sb.append(getObject());
-    sb.append("], field [");
-    sb.append(getFieldName());
-    sb.append("], entry index [");
-    sb.append(getIndex());
-    sb.append("].");
-    return sb.toString();
-  }
-
+  
   public Object[] getMessageParameters()
   {
     return new Object[]
@@ -97,5 +85,21 @@ public class EntryLocator extends VerificationEventLocator
       return
         MessageFormat.format("Object: {0}\nField: {1}\nEntry index: {2}.\nEL: {3}\nJXPath: {4}.", getMessageParameters());
     }
+  }
+
+  public boolean equals(Object obj)
+  {
+    boolean result = false;
+    if (obj instanceof EntryLocator)
+    {
+      final EntryLocator locator = (EntryLocator) obj;
+      result = super.equals(locator) && getIndex() == locator.getIndex();
+    }
+    return result;
+  }
+
+  public int hashCode()
+  {
+    return super.hashCode() * 23 + getIndex();
   }
 }

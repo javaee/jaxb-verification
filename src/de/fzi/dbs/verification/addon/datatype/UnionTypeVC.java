@@ -6,6 +6,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JVar;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.UnionType;
 import com.sun.msv.datatype.xsd.XSDatatype;
@@ -17,7 +18,7 @@ import com.sun.msv.datatype.xsd.XSDatatype;
  */
 public class UnionTypeVC extends AbstractVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final UnionType unionType = (UnionType) datatype;
 
@@ -31,7 +32,7 @@ public class UnionTypeVC extends AbstractVC
       final XSDatatype currentDatatype = unionType.memberTypes[index];
       final VerificatorConstructor vc =
         VerificatorConstructorFactory.getVerificatorConstructor(currentDatatype);
-      vc.verify(currentDatatype, codeModel, value, currentProblem);
+      vc.verify(currentDatatype, codeModel, theClass, value, currentProblem);
       currentBlock.directStatement("// Add current problem to the list of problems");
     }
     block.directStatement("// todo: Throw \"object does not match any of the types of the union expression\"");

@@ -8,6 +8,7 @@ import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.xsd.DataTypeWithFacet;
 import com.sun.msv.datatype.xsd.RangeFacet;
 import de.fzi.dbs.verification.addon.datatype.ComparatorVC;
@@ -24,7 +25,7 @@ import java.math.BigInteger;
  */
 public abstract class RangeFacetVC extends DataTypeWithValueConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final RangeFacet rangeFacet = (RangeFacet) datatype;
     JExpression limitValue = null;

@@ -92,13 +92,7 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
 
   public String toString()
   {
-    final StringBuffer sb = new StringBuffer();
-    sb.append("Object [");
-    sb.append(getObject());
-    sb.append("], field [");
-    sb.append(getFieldName());
-    sb.append("].");
-    return sb.toString();
+    return getMessage();
   }
 
   /**
@@ -186,4 +180,26 @@ public class VerificationEventLocator implements ValidationEventLocatorEx, Repor
   {
     return getMessage(ResourceBundle.getBundle(getClass().getPackage().getName() + ".Messages"));
   }
+
+  public int hashCode()
+  {
+    int hashCode = (parentLocator == null) ? 0 : parentLocator.hashCode();
+    hashCode = hashCode * 49 + getObject().hashCode();
+    hashCode = hashCode * 49 + getFieldName().hashCode();
+    return hashCode;
+  }
+
+  public boolean equals(Object obj)
+  {
+    boolean result = false;
+    if (obj instanceof VerificationEventLocator)
+    {
+      final VerificationEventLocator locator = (VerificationEventLocator) obj;
+      result = (getObject() == locator.getObject()) &&
+        (getFieldName().equals(locator.getFieldName()));
+    }
+    return result;
+  }
+
+
 }

@@ -7,6 +7,7 @@ import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import com.sun.msv.datatype.xsd.UnicodeUtil;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
@@ -21,7 +22,7 @@ import de.fzi.dbs.verification.util.ValidationUtils;
  */
 public class AnyURITypeVC extends AbstractVC implements DiscreteVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final JConditional ifIsAnyURI = block._if(codeModel.ref(de.fzi.dbs.verification.util.ValidationUtils.class).staticInvoke("isAnyURI").arg(value));

@@ -8,6 +8,7 @@ import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.xsd.DataTypeWithFacet;
 import de.fzi.dbs.verification.addon.datatype.DiscreteVC;
 import de.fzi.dbs.verification.addon.datatype.VerificatorConstructor;
@@ -20,7 +21,7 @@ import de.fzi.dbs.verification.addon.datatype.VerificatorConstructorFactory;
  */
 public abstract class BaseLengthFacetVC extends DataTypeWithValueConstraintFacetVC
 {
-  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement diagnoseByFacet(final DataTypeWithFacet datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     final VerificatorConstructor vc = VerificatorConstructorFactory.getVerificatorConstructor(datatype.getConcreteType());

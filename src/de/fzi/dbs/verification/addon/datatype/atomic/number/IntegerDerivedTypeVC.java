@@ -6,6 +6,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JStatement;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.msv.datatype.DatabindableDatatype;
 import de.fzi.dbs.verification.addon.datatype.AbstractVC;
 import de.fzi.dbs.verification.addon.datatype.ComparatorVC;
@@ -17,7 +18,7 @@ import de.fzi.dbs.verification.addon.datatype.ComparatorVC;
  */
 public abstract class IntegerDerivedTypeVC extends AbstractVC implements ComparatorVC
 {
-  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, final JExpression value, final JAssignmentTarget problem)
+  public JStatement verify(final DatabindableDatatype datatype, final JCodeModel codeModel, JDefinedClass theClass, final JExpression value, final JAssignmentTarget problem)
   {
     final JBlock block = newBlock();
     return block;

@@ -1,8 +1,6 @@
-package tests.one.src.de.fzi.dbs.verification.tests.one;
+package de.fzi.dbs.verification.tests.one;
 
 import de.fzi.dbs.verification.ObjectVerifier;
-import de.fzi.dbs.verification.tests.one.ObjectVerifierFactory;
-import de.fzi.dbs.verification.tests.one.Root;
 import de.fzi.dbs.verification.tests.one.impl.RootImpl;
 import de.fzi.dbs.verification.tests.one.impl.ElementWithListAttribute1Impl;
 import junit.framework.TestCase;
@@ -20,7 +18,7 @@ public class VerificationTest extends TestCase
   /**
    * Logger.
    */
-  protected Log log = LogFactory.getLog(tests.one.src.de.fzi.dbs.verification.tests.one.VerificationTest.class);
+  protected Log log = LogFactory.getLog(de.fzi.dbs.verification.tests.one.VerificationTest.class);
   /**
    * Object verifier factory.
    */

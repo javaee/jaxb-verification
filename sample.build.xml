@@ -3,10 +3,15 @@
 
   <property name="main.dir" value="../.."/>
 
+  <!-- Directory that contains log4j.properties. -->
+  <property name="log4j.dir" location="${main.dir}/log4j"/>
+
   <!-- Change this property to the location where jaxb-verification.jar is placed -->
   <property name="main.dist.dir" location="${main.dir}/dist"/>
+
   <!-- Change this property to the location where library directories are placed -->
   <property name="main.lib.dir" location="${main.dir}/lib"/>
+
   <property name="sample.lib.dir" location="${basedir}/lib"/>
 
   <property name="name" value="sample"/>
