@@ -26,6 +26,9 @@ by Aleksei Valikov, valikov@fzi.de
       <include name="commons-lang.jar"/>
       <include name="commons-logging.jar"/>
     </fileset>
+    <fileset dir="${lib.dir}/easymock">
+      <include name="*.jar"/>
+    </fileset>
     <fileset dir="${lib.dir}/hyperjaxb">
       <include name="*.jar"/>
     </fileset>
@@ -36,6 +39,7 @@ by Aleksei Valikov, valikov@fzi.de
       <include name="jaxb-xjc.jar"/>
       <include name="relaxngDatatype.jar"/>
       <include name="xsdlib.jar"/>
+      <include name="xercesImpl.jar"/>
     </fileset>
     <fileset dir="${lib.dir}/junit">
       <include name="*.jar"/>
